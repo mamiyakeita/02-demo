@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>paintingbar51</title>
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+  <link rel="stylesheet" href="css/newstyle.css">
+  <script src="js/newscript.js" defer></script>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <script>
+    const socket = io();
+    socket.emit('message', 'やっほー！');
+    socket.on('reply', msg => console.log('サーバーから:', msg));
+  </script>
+  <div class="table-wrapper">
+    <table id="sakusen" class="sakusen"></table>
+    <table id="table" class="table"></table>
+    <p><span id="mytime">99:99</span></p>
+  </div>
+</body>
+</html>
