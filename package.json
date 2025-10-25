@@ -1,17 +1,17 @@
 {
-  "name": "game-server",
-  "version": "1.0.0",
-  "main": "server.js",
+  "name": "11ty-to-compute",
+  "version": "0.0.1",
+  "description": "An Eleventy blog you can publish to Fastly for free.",
   "scripts": {
-    "start": "node server.js"
+    "start": "eleventy --serve",
+    "build":"eleventy"
   },
   "dependencies": {
-    "express": "^4.21.2",
-    "socket.io": "^4.8.1",
-    "ws": "^8.18.3"
+    "luxon": "^3.6.1"
   },
-  "description": "",
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-navigation": "^0.3.5"
+  },
+  "license": "MIT"
 }
