@@ -1,5 +1,17 @@
 {
+  "name": "11ty-to-compute",
+  "version": "0.0.1",
+  "description": "An Eleventy blog you can publish to Fastly for free.",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build":"eleventy"
+  },
   "dependencies": {
-    "socket.io": "^4.8.1"
-  }
+    "luxon": "^3.6.1"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-navigation": "^0.3.5"
+  },
+  "license": "MIT"
 }
