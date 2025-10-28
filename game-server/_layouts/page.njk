@@ -1,11 +1,35 @@
----
-templateClass: tmpl-home
----
-
-{# The About page uses this template and you can customize / use it for any new pages you add #}
-
-<div class="wrapper">
-  <div class="content">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    {# This is the base template for the site–other templates extend this one #}
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{ metadata.description }}" />
+    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  </head>
+  <body>
+    <header>
+      <a href="/" class="home-link">{{ metadata.title }}</a>
+      {#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
+      <nav>
+      <a href="/about">base.njk</a>
+      </nav>
+    </header>
+    <main>
+    
+    {# Page or post content will appear here #}
+  
     {{ content | safe }}
-  </div>
-</div>
+    
+    </main>
+    <footer class="footer">
+    <div>
+      <a class="remix" href="https://github.com/glitchdotcom/11ty-to-compute">🎉 Getbase.njk</a>
+    </div>
+    </footer>
+   
+  </body>
+</html>
