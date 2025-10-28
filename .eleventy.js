@@ -57,7 +57,7 @@ module.exports = function (eleventyConfig) {
 
   return {
     dir: {
-      input: "game-server/public",
+      input: "game-server",
       includes: "_layouts",
       data: "_data",
       output: "./deploy/_site",
