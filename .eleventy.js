@@ -64,12 +64,3 @@ module.exports = function (eleventyConfig) {
     },
   };
 };
-module.exports = function(eleventyConfig) {
-  eleventyConfig.addPassthroughCopy("game-server/js");
-  return {
-    dir: {
-      input: "game-server",
-      output: "deploy/_site"
-    }
-  };
-};
