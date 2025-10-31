@@ -7,12 +7,12 @@ templateClass: tmpl-home
 
 <div class="wrapper home">
   <div class="content">
-
-<div class="illo-container">
-<img class="illustration" src="/assets/tada.svg"/>
-</div>
-
     {{ content | safe }}
-    
+
+    <div class="table-wrapper">
+      <table id="sakusen" class="sakusen"></table>
+      <table id="table" class="table"></table>
+      <p><span id="mytime">99:99</span></p>
+    </div>
   </div>
 </div>
