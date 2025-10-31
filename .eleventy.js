@@ -39,6 +39,8 @@ module.exports = function (eleventyConfig) {
          - https://www.11ty.dev/docs/collections/
       */
 
+  eleventyConfig.addPassthroughCopy("game-server/js");
+
     const coll = collection
       .getFilteredByTag("posts")
       .sort((a, b) => b.data.date - a.data.date);
