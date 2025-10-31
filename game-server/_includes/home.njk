@@ -1,1 +1,18 @@
+---
+layout: base.njk
+templateClass: tmpl-home
+---
 
+{# The Home page uses this template–it extends the base template #}
+
+<div class="wrapper home">
+  <div class="content">
+    {{ content | safe }}
+
+    <div class="table-wrapper">
+      <table id="sakusen" class="sakusen"></table>
+      <table id="table" class="table"></table>
+      <p><span id="mytime">99:99</span></p>
+    </div>
+  </div>
+</div>
