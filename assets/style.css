@@ -19,6 +19,7 @@ main {
 .table-wrapper {
   position: relative;
   width: 100vw;
+  height: 100vh;
 }
 .sakusen {
   border-collapse: collapse;
