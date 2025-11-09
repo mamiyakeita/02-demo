@@ -12,7 +12,7 @@ function createTileContent(value) {
     else if (value === 24) backgroundColor = "green";
     fish.className = "circle triangle";
     fish.style.backgroundColor = backgroundColor; // ← これが必要！
-    container.appendChild(circle);
+    container.appendChild(fish);
   }
   return container;
 }
