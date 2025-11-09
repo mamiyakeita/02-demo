@@ -5,13 +5,13 @@ function createTileContent(value) {
   const container = document.createElement("div");
   container.className = "tile-content";
   if (three.includes(value)) {
-    const circle = document.createElement("div");
+    const fish = document.createElement("div");
     let backgroundColor;
     if (value === 22) backgroundColor = "red";
     else if (value === 23) backgroundColor = "blue";
     else if (value === 24) backgroundColor = "green";
-    circle.className = "circle";
-    circle.style.backgroundColor = backgroundColor; // ← これが必要！
+    fish.className = "circle triangle";
+    fish.style.backgroundColor = backgroundColor; // ← これが必要！
     container.appendChild(circle);
   }
   return container;
