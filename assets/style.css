@@ -51,11 +51,7 @@ main {
   background-color: rgb(51, 204, 102);
   flex-wrap: wrap;
 }
-.fish {
-  position: relative;
-}
 .circle {
-  position: absolute;
   width: 35px;
   height: 70px;
   border-radius: 50%;
