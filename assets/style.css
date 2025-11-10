@@ -56,11 +56,5 @@ main {
   height: 70px;
   border-radius: 50%;
   background-color: blue;
-  z-index: 1;
-}
-.triangle {
-  position: absolute;
-  top: 30px;
-  left: 45px;
-  z-index: 2;
+  margin: auto;
 }
