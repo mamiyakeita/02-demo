@@ -1,3 +1,14 @@
 ---
-layout: home.njk
+layout: base.njk
+templateClass: tmpl-home
 ---
+<div class="wrapper home">
+{{ content | safe }}
+  <div class="content">
+    <div class="table-wrapper">
+      <table id="sakusen" class="sakusen"></table>
+      <table id="table" class="table"></table>
+      <p><span id="mytime">77:77</span></p>
+    </div>
+  </div>
+</div>
