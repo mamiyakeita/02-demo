@@ -54,26 +54,17 @@ main {
 .fish {
   position: relative;
 }
-
 .circle {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 35px;
   height: 70px;
   border-radius: 50%;
   background-color: blue;
   z-index: 1;
 }
-
 .triangle {
   position: absolute;
   top: 30px;
   left: 45px;
-  width: 0;
-  height: 0;
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  border-left: 20px solid red;
   z-index: 2;
 }
