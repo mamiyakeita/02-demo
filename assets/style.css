@@ -51,18 +51,29 @@ main {
   background-color: rgb(51, 204, 102);
   flex-wrap: wrap;
 }
+.fish {
+  position: relative;
+}
+
 .circle {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 35px;
   height: 70px;
   border-radius: 50%;
-  background-color: white;
-  margin: auto;
+  background-color: blue;
+  z-index: 1;
 }
+
 .triangle {
+  position: absolute;
+  top: 30px;
+  left: 45px;
   width: 0;
   height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 30px solid red;
-  margin: auto;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 20px solid red;
+  z-index: 2;
 }
