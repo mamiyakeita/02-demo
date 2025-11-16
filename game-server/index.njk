@@ -1,13 +1,24 @@
----
-layout: base.njk
-templateClass: tmpl-home
----
-<div class="wrapper home">
-  <div class="content">
-    <div class="table-wrapper">
-      <table id="sakusen" class="sakusen"></table>
-      <table id="table" class="table"></table>
-      <p><span id="mytime">77:77</span></p>
-    </div>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{ metadata.description }}" />
+    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+　　<script src="/assets/game.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <div class="wrapper home">
+        <div class="content">
+          <div class="table-wrapper">
+            <table id="sakusen" class="sakusen"></table>
+            <table id="table" class="table"></table>
+            <p><span id="mytime">77:77</span></p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
