@@ -1,24 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="https://glitch.com/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="{{ metadata.description }}" />
-    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
-　　<script src="/assets/game.js" defer></script>
-  </head>
-  <body>
-    <main>
-      <div class="wrapper home">
-        <div class="content">
-          <div class="table-wrapper">
-            <table id="sakusen" class="sakusen"></table>
-            <table id="table" class="table"></table>
-            <p><span id="mytime">77:77</span></p>
-          </div>
-        </div>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>paintingbar51</title>
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+  <link rel="stylesheet" href="css/newstyle.css">
+  <script src="js/newscript.js" defer></script>
+</head>
+<body>
+  <div class="table-wrapper">
+    <table id="sakusen" class="sakusen"></table>
+    <table id="VSsakusen" class="VSsakusen"></table>
+    <table id="table" class="table"></table>
+    <button id="startButton">！開戦！</button>
+    <p><span id="mytime" class="mytimer">99:99</span></p>
+    <div id="gameOver" class="game-over hidden">
+      <div class="game-over-content">
+        <p id="gameOverMessage">YOU LOSE</p>
+        <button id="gameOverOk" class="game-over-ok">OK</button>
       </div>
-    </main>
-  </body>
+    </div>
+    <div id="winOverlay" class="game-over hidden">
+      <div class="game-over-content">
+        <p id="winMessage">YOU WIN</p>
+        <button id="winOk" class="game-over-ok">OK</button>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
