@@ -1,78 +1,192 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-h1, h2, h3, h4, h5, h6, p {
-  margin: 0;
-  padding: 0;
-}
-table {
-  margin: 0;
-  padding: 0;
-}
-main {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
 .table-wrapper {
   position: relative;
   width: 100vw;
   height: 100vh;
 }
-.triangle {
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 25px solid black;
-  margin: auto;
-}
 .sakusen {
   border-collapse: collapse;
   position: absolute;
-  top: 100%;
-  left: 100%;
+  top: 99%;
+  left: 99%;
   transform: translate(-100%, -100%);
+  text-align: center;
+}
+.VSsakusen {
+  border-collapse: collapse;
+  position: absolute;
+  top: 1%;
+  left: 99%;
+  transform: translate(-100%, 0%);
   text-align: center;
 }
 .table {
   border-collapse: collapse;
   position: absolute;
   top: 50%;
-  left: 55%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
-.sakusen-tile {
-  min-width: 100px;
-  height: 100px;
+.ST {
+  min-width: 16vh;
+  height: 16vh;
   border: 1px solid black;
-  font-size: 36px;
+  font-size: 5vh;
   background-color: lightblue;
 }
-.tile {
-  width: 120px;
-  height: 120px;
+.VSST {
+  min-width: 16vh;
+  height: 16vh;
   border: 1px solid black;
-  font-size: 36px;
+  font-size: 5vh;
+  background-color: pink;
+}
+.tile {
+  width: 19vh;
+  height: 19vh;
+  border: 1px solid black;
+  font-size: 5vh;
   background-color: rgb(51, 204, 102);
   flex-wrap: wrap;
 }
+td.selected {
+  outline: 1px solid rgb(51, 102, 204);
+  background-color: rgb(102, 204, 51);
+}
+.tile.empty .tile-content {
+  visibility: hidden;
+}
 .circle {
-  width: 35px;
-  height: 70px;
+  width: 5vh;
+  height: 10vh;
   border-radius: 50%;
-  background-color: blue;
+  background-color: white;
+  margin: auto;
+}
+.circleM {
+  width: 8vh;
+  height: 8vh;
+  border-radius: 50%;
+  background-color: orange;
+  margin: auto;
+}
+.circleM2 {
+  width: 8vh;
+  height: 8vh;
+  border-radius: 50%;
+  background-color: orange;
   margin: auto;
 }
 .triangle {
   width: 0;
   height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 25px solid black;
+  border-left: 3vh solid transparent;
+  border-right: 3vh solid transparent;
+  border-bottom: 3.5vh solid black;
   margin: auto;
+}
+.VScircle {
+  width: 5vh;
+  height: 10vh;
+  border-radius: 50%;
+  background-color: blue;
+  margin: auto;
+}
+.VStriangle {
+  width: 0;
+  height: 0;
+  border-left: 3vh solid transparent;
+  border-right: 3vh solid transparent;
+  border-top: 3.5vh solid red;
+  margin: auto;
+}
+.circle2 {
+  width: 6vh;
+  height: 6vh;
+  border-radius: 50%;
+  background-color: brown;
+  margin: auto;
+}
+.VScircle2 {
+  width: 6vh;
+  height: 6vh;
+  border-radius: 50%;
+  background-color: purple;
+  margin: auto;
+}
+#startButton {
+  position: fixed;
+  top: 18vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 2vh 2vh;
+  font-size: 18vh;
+  background-color: orange;
+  color: white;
+  border: none;
+  border-radius: 1vh;
+  cursor: pointer;
+}
+.mytimer {
+  display: inline-block;
+  transform: rotate(270deg);
+  font-size: 10vh;
+  font-weight: bold;
+  position: absolute;
+  top: 70vh;
+  left: 15vw;
+  background-color: white;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 8px;
+}
+body {
+  background-color: grey;
+}
+.game-over {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,0.6);
+  z-index: 2000;
+}
+.game-over-content {
+  background: transparent;
+  color: #fff;
+  padding: 4vh 6vh;
+  font-size: 6vh;
+  border-radius: 1vh;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
+}
+.hidden { display: none; }
+.game-over-ok {
+  display: inline-block;
+  padding: 1vh 2vh;
+  font-size: 3vh;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 0.5vh;
+  cursor: pointer;
+}
+.game-over-ok:active { transform: translateY(1px); }
+#gameOverMessage {
+  margin: 0;
+  font-size: 10vh;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0 0 1vh rgba(0,0,0,0.6);
+}
+#winMessage {
+  margin: 0;
+  font-size: 10vh;
+  font-weight: bold;
+  text-align: center;
+  color: #ffd54f;
+  text-shadow: 0 0 1vh rgba(0,0,0,0.6);
 }
