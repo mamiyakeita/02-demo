@@ -594,3 +594,17 @@ function count(now) {
 window.onload = () => {
   init();
 };
+socket.on("playerAction", data => {
+  if (data.type === "click") {
+    applyOpponentMove(data.index, data.color);
+  }
+});
+function applyOpponentMove(index, color) {
+  const cell = STMap[index];
+  if (!cell) return;
+
+  const circle = cell.querySelector(".circle2");
+  if (!circle) return;
+
+  circle.style.backgroundColor = color;
+}
