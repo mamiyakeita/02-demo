@@ -370,7 +370,11 @@ function click2(e) {
       gameState.fastTd2 = null;
       return;
     }
-  }
+  socket.emit("playerAction", {
+    type: "click",
+    index: index,
+    color: circle.style.backgroundColor
+  }); 
 }
 function swap(i, j) {
   const aVal = tiles[i].value;
