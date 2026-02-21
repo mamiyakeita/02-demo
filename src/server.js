@@ -9,19 +9,12 @@ const io = new Server(server, {
   cors: { origin: "*" }
 });
 
-// 静的ファイル（public フォルダ）
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../deploy/_site")));
 
-// DB テスト用
-app.get("/users", async (req, res) => {
-  try {
-    const result = await pool.query("SELECT * FROM users");
-    res.json(result.rows);
-  } catch (err) {
-    console.error("DBエラー:", err);
-    res.status(500).send("エラーだよ～！");
-  }
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../deploy/_site/index.html"));
 });
+
 
 // WebSocket（部屋機能）
 io.on("connection", socket => {
