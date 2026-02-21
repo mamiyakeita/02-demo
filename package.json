@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "An Eleventy blog you can publish to Fastly for free.",
   "scripts": {
-    "start": "eleventy --serve",
-    "build":"eleventy"
+  "start": "node server.js",
+  "build": "eleventy"
   },
   "dependencies": {
     "luxon": "^3.6.1"
