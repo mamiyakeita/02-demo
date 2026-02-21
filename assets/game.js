@@ -383,7 +383,7 @@ function click2(e) {
     index: index,
     color: circle.style.backgroundColor
   });
-  ｝
+  }
 }
 function swap(i, j) {
   const aVal = tiles[i].value;
