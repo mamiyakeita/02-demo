@@ -382,7 +382,8 @@ function click2(e) {
     type: "click",
     index: index,
     color: circle.style.backgroundColor
-  }); 
+  });
+  ｝
 }
 function swap(i, j) {
   const aVal = tiles[i].value;
