@@ -1,4 +1,5 @@
 "use strict";
+const socket = io(); // 同じサーバーに接続
 const tiles = [];
 const STs = [];
 const VSSTs = [];
