@@ -1,5 +1,13 @@
 "use strict";
 const socket = io(); // 同じサーバーに接続
+const roomId = "room123"; // 本当はランダムが良い
+socket.emit("joinRoom", roomId);
+socket.on("joinedRoom", roomId => {
+  console.log("部屋に参加:", roomId);
+});
+socket.on("roomFull", () => {
+  alert("この部屋は満員です！");
+});
 const tiles = [];
 const STs = [];
 const VSSTs = [];
