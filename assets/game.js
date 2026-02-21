@@ -599,9 +599,6 @@ function count(now) {
     gameState.running = false;
   }
 }
-window.onload = () => {
-  init();
-};
 socket.on("playerAction", data => {
   if (data.type === "click") {
     applyOpponentMove(data.index, data.color);
@@ -616,3 +613,6 @@ function applyOpponentMove(index, color) {
 
   circle.style.backgroundColor = color;
 }
+window.onload = () => {
+  init();
+};
