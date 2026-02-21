@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "An Eleventy blog you can publish to Fastly for free.",
   "scripts": {
-  "start": "node server.js",
+  "start": "node src/server.js",
   "build": "eleventy"
   },
   "dependencies": {
