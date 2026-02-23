@@ -67,6 +67,6 @@ module.exports = function (eleventyConfig) {
       includes: "_layouts",
       data: "_data"
     }
+  }
   };
 };
-
