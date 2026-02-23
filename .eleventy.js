@@ -57,12 +57,16 @@ module.exports = function (eleventyConfig) {
     return coll;
   });
 
+ module.exports = function(eleventyConfig) {
+  eleventyConfig.addPassthroughCopy("assets");
+
   return {
     dir: {
       input: "game-server",
-      includes: "_layouts",
-      data: "_data",
       output: "./deploy/_site",
-    },
+      includes: "_layouts",
+      data: "_data"
+    }
   };
 };
+
