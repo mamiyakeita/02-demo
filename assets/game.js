@@ -1,5 +1,8 @@
 "use strict";
-const socket = io(); // 同じサーバーに接続
+const socket = io({
+  transports: ["websocket"],
+  forceNew: true
+});
 const roomId = "room123"; // 本当はランダムが良い
 socket.emit("joinRoom", roomId);
 socket.on("joinedRoom", roomId => {
