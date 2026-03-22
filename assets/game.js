@@ -620,3 +620,9 @@ function applyOpponentMove(index, color) {
 window.onload = () => {
   init();
 };
+canvas.addEventListener("click", e => {
+  const x = e.clientX;
+  const y = e.clientY;
+  // 自分の操作をサーバーへ送信
+  socket.emit("playerAction", { x, y });
+});
