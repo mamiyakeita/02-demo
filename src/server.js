@@ -36,10 +36,8 @@ io.on("connection", socket => {
   });
 
   socket.on("playerAction", data => {
-    if (!socket.roomId) return;
     console.log("相手の操作:", data);
     drawOpponentCursor(data.x, data.y);
-    socket.to(socket.roomId).emit("playerAction", data);
   });
 
   socket.on("disconnect", () => {
