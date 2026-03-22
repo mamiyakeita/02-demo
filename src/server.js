@@ -23,7 +23,7 @@ io.on("connection", socket => {
   socket.on("joinRoom", roomId => {
     const room = io.sockets.adapter.rooms.get(roomId);
 
-    if (room && room.size >= 1) {
+    if (room && room.size >= 2) {
       socket.emit("roomFull");
       return;
     }
