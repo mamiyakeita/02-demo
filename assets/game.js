@@ -11,6 +11,8 @@ socket.on("joinedRoom", roomId => {
 socket.on("roomFull", () => {
   alert("この部屋は満員です！");
 });
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 const tiles = [];
 const STs = [];
 const VSSTs = [];
