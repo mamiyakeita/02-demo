@@ -17,7 +17,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.setBrowserSyncConfig({ ghostMode: false });
 
   // ★ これだけでOK（input=game-server なので assets は game-server/assets）
-  eleventyConfig.addPassthroughCopy("assets");
+  eleventyConfig.addPassthroughCopy("game-server/assets");
 
   return {
     dir: {
