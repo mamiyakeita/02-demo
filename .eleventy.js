@@ -17,9 +17,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.setBrowserSyncConfig({ ghostMode: false });
 
   // assets をそのままコピー
-  eleventyConfig.addPassthroughCopy("game-server/assets");
-
-  // game-server/js もコピーしたいならこれでOK
   eleventyConfig.addPassthroughCopy("assets");
 
   // 日付フィルタ
