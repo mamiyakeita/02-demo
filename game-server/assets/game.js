@@ -1,3 +1,7 @@
+---
+permalink: false
+---
+
 "use strict";
 const socket = io({
   transports: ["websocket"],
