@@ -19,12 +19,13 @@ module.exports = function (eleventyConfig) {
   // ★ これだけでOK（input=game-server なので assets は game-server/assets）
   eleventyConfig.addPassthroughCopy("assets");
 
-  return {
-    dir: {
-      input: "game-server",
-      includes: "_layouts",
-      data: "_data",
-      output: "deploy/_site"
-    }
-  };
+  const path = require("path");
+
+return {
+  dir: {
+    input: "game-server",
+    includes: "_layouts",
+    data: "_data",
+    output: path.join(__dirname, "deploy/_site")
+  }
 };
