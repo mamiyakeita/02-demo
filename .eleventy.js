@@ -1,5 +1,6 @@
 const { DateTime } = require("luxon");
 const pluginNavigation = require("@11ty/eleventy-navigation");
+const path = require("path");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.setTemplateFormats([
@@ -16,16 +17,15 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginNavigation);
   eleventyConfig.setBrowserSyncConfig({ ghostMode: false });
 
-  // ★ これだけでOK（input=game-server なので assets は game-server/assets）
+  // assets をそのままコピー（input=game-server なので assets は game-server/assets）
   eleventyConfig.addPassthroughCopy("assets");
 
-  const path = require("path");
-
-return {
-  dir: {
-    input: "game-server",
-    includes: "_layouts",
-    data: "_data",
-    output: path.join(__dirname, "deploy/_site")
-  }
+  return {
+    dir: {
+      input: "game-server",
+      includes: "_layouts",
+      data: "_data",
+      output: path.join(__dirname, "deploy/_site")
+    }
+  };
 };
