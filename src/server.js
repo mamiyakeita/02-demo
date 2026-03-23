@@ -9,7 +9,10 @@ const io = new Server(server, {
   cors: { origin: "*" }
 });
 
-app.use(express.static(path.join(__dirname, "../deploy/_site")));
+app.use(express.static(path.join(__dirname, "../deploy/_site"), {
+  etag: false,
+  maxAge: 0
+}));
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../deploy/_site/index.html"));
