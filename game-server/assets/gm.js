@@ -1,18 +1,4 @@
 "use strict";
-const socket = io({
-  transports: ["websocket"],
-  forceNew: true
-});
-const roomId = "room123"; // 本当はランダムが良い
-socket.emit("joinRoom", roomId);
-socket.on("joinedRoom", roomId => {
-  console.log("部屋に参加:", roomId);
-});
-socket.on("roomFull", () => {
-  alert("この部屋は満員です！");
-});
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
 const tiles = [];
 const STs = [];
 const VSSTs = [];
@@ -622,9 +608,3 @@ function applyOpponentMove(index, color) {
 window.onload = () => {
   init();
 };
-canvas.addEventListener("click", e => {
-  const x = e.clientX;
-  const y = e.clientY;
-  // 自分の操作をサーバーへ送信
-  socket.emit("playerAction", { x, y });
-});
