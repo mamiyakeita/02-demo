@@ -17,7 +17,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginNavigation);
   eleventyConfig.setBrowserSyncConfig({ ghostMode: false });
 
-  // assets をそのままコピー（input=game-server なので assets は game-server/assets）
+  // assets をそのままコピー
   eleventyConfig.addPassthroughCopy("assets");
 
   return {
@@ -25,7 +25,7 @@ module.exports = function (eleventyConfig) {
       input: "game-server",
       includes: "_layouts",
       data: "_data",
-      output: path.join(__dirname, "deploy/_site")
+      output: "deploy/_site"
     }
   };
 };
