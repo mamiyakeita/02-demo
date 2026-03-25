@@ -19,10 +19,6 @@ module.exports = function (eleventyConfig) {
 
   // assets をそのままコピー（input=game-server なので assets は game-server/assets）
   eleventyConfig.addPassthroughCopy("assets");
-  eleventyConfig.addPassthroughCopy({
-  "assets/game2.js": "assets/game2.js"
-});
-
 
   return {
     dir: {
