@@ -128,12 +128,6 @@ function createTileContent(value, overrideColor) {
   }
   return container;
 }
-document.getElementById("startButton").addEventListener("click", () => {
-  const button = document.getElementById("startButton");
-  button.style.display = "none";
-  requestAnimationFrame(count);
-  gameState.gamestart = true;
-});
 const STMap = {};
 function init() {
   const VSsakusen = document.getElementById("VSsakusen");
@@ -571,11 +565,21 @@ function resetGame() {
   if (startBtn) startBtn.style.display = '';
 }
 document.addEventListener('DOMContentLoaded', () => {
+  init();
+  
+  document.getElementById("startButton").addEventListener("click", () => {
+    const button = document.getElementById("startButton");
+    button.style.display = "none";
+    requestAnimationFrame(count);
+    gameState.gamestart = true;
+  });
+
   const ok = document.getElementById('gameOverOk');
   if (ok) ok.addEventListener('click', resetGame);
   const wok = document.getElementById('winOk');
   if (wok) wok.addEventListener('click', resetGame);
 });
+
 function count(now) {
   if (!gameState.startTime) gameState.startTime = now;
   const elapsed = (now - gameState.startTime) / 1000;
@@ -606,5 +610,5 @@ function applyOpponentMove(index, color) {
   circle.style.backgroundColor = color;
 }
 window.onload = () => {
-  init();
+  //init();
 };
