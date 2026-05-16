@@ -180,7 +180,7 @@ function init() {
       td.setAttribute("data-index", index);
       td.appendChild(createTileContent(td.value, td.dataset.overrideColor));
       tr.appendChild(td);
-      tiles.push(td);
+      TILEs.push(td);
     }
     table.appendChild(tr);
   }
@@ -228,7 +228,7 @@ function click(e) {
   for (let s = 0; s < STs.length; s++) {
     const st = STs[s];
     const stColor = st.querySelector(".circle2")?.style.backgroundColor;
-    const currentTile = tiles[gameState.fastTd];
+    const currentTile = TILEs[gameState.fastTd];
     const tileColor = currentTile.querySelector(".circle")?.style.backgroundColor;
     if (stColor && tileColor && stColor === tileColor) {
       const stRow = Math.floor(s / 3);
