@@ -1,5 +1,5 @@
 "use strict";
-const tiles = [];
+const TILEs = [];
 const STs = [];
 const VSSTs = [];
 const CONFIG = {
