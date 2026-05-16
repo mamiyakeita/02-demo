@@ -250,7 +250,7 @@ function click(e) {
 }
 function VSthink() {
   if (!gameState.mytarn) {
-    const candidates = tiles.filter(td => td.value ===7 || td.value === 8 || td.value === 9);
+    const candidates = TILEs.filter(td => td.value ===7 || td.value === 8 || td.value === 9);
     const randomTile = candidates[Math.floor(Math.random() * candidates.length)];
     if (randomTile) {
       const fakeEvent = { target: randomTile };
@@ -280,7 +280,7 @@ function VSclick(e) {
   for (let s = 0; s < STs.length; s++) {
     const vsst = VSSTs[s];
     const vsstColor = vsst.querySelector(".VScircle2")?.style.backgroundColor;
-    const currentTile = tiles[index];
+    const currentTile = TILEs[index];
     const tileColor = currentTile.querySelector(".VScircle")?.style.backgroundColor;
     if (vsstColor && tileColor && vsstColor === tileColor) {
       const stRow = Math.floor(s / 3);
@@ -294,7 +294,7 @@ function VSclick(e) {
       }
     }
     let neighborIndex = VSneighbors[s];
-    let neighborTile = tiles[neighborIndex];
+    let neighborTile = TILEs[neighborIndex];
     if (neighborTile && CONFIG.three.includes(neighborTile.value)) {
       next = neighborIndex;
     }
@@ -371,16 +371,16 @@ function click2(e) {
   }
 }
 function swap(i, j) {
-  const aVal = tiles[i].value;
-  const bVal = tiles[j].value;
+  const aVal = TILEs[i].value;
+  const bVal = TILEs[j].value;
   if (CONFIG.three.includes(aVal) && CONFIG.three2.includes(bVal)) {
-    tiles[j].value = aVal;
-    tiles[j].classList.remove('empty');
-    tiles[j].innerHTML = "";
-    if (tiles[i].dataset.overrideColor) {
-      tiles[j].dataset.overrideColor = tiles[i].dataset.overrideColor;
+    TILEs[j].value = aVal;
+    TILEs[j].classList.remove('empty');
+    TILEs[j].innerHTML = "";
+    if (TILEs[i].dataset.overrideColor) {
+      TILEs[j].dataset.overrideColor = TILEs[i].dataset.overrideColor;
     } else {
-      delete tiles[j].dataset.overrideColor;
+      delete TILEs[j].dataset.overrideColor;
     }
     delete tiles[i].dataset.overrideColor;
     tiles[j].appendChild(createTileContent(tiles[j].value, tiles[j].dataset.overrideColor));
