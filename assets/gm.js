@@ -388,7 +388,7 @@ function swap(i, j) {
     TILEs[i].classList.add('empty');
     TILEs[i].innerHTML = "";
     delete TILEs[i].dataset.overrideColor;
-    TILEss[i].appendChild(createTileContent(TILEs[i].value, TILEs[i].dataset.overrideColor));
+    TILEs[i].appendChild(createTileContent(TILEs[i].value, TILEs[i].dataset.overrideColor));
     if (gameState.gamestart) {
       gameState.mytarn = !gameState.mytarn;
       VSthink();
