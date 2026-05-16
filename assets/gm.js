@@ -382,13 +382,13 @@ function swap(i, j) {
     } else {
       delete TILEs[j].dataset.overrideColor;
     }
-    delete tiles[i].dataset.overrideColor;
-    tiles[j].appendChild(createTileContent(tiles[j].value, tiles[j].dataset.overrideColor));
-    tiles[i].value = 0;
-    tiles[i].classList.add('empty');
-    tiles[i].innerHTML = "";
-    delete tiles[i].dataset.overrideColor;
-    tiles[i].appendChild(createTileContent(tiles[i].value, tiles[i].dataset.overrideColor));
+    delete TILEs[i].dataset.overrideColor;
+    TILEs[j].appendChild(createTileContent(TILEs[j].value, TILEs[j].dataset.overrideColor));
+    TILEs[i].value = 0;
+    TILEs[i].classList.add('empty');
+    TILEs[i].innerHTML = "";
+    delete TILEs[i].dataset.overrideColor;
+    TILEss[i].appendChild(createTileContent(TILEs[i].value, TILEs[i].dataset.overrideColor));
     if (gameState.gamestart) {
       gameState.mytarn = !gameState.mytarn;
       VSthink();
@@ -396,17 +396,17 @@ function swap(i, j) {
     checkAllFish();
     return;
   }
-  const tmpValue = tiles[i].value;
-  tiles[i].value = tiles[j].value;
-  tiles[j].value = tmpValue;
-  const tmpOverride = tiles[i].dataset.overrideColor;
-  if (tiles[j].dataset.overrideColor) {
-    tiles[i].dataset.overrideColor = tiles[j].dataset.overrideColor;
+  const tmpValue = TILEs[i].value;
+  TILEs[i].value = TILEs[j].value;
+  TILEs[j].value = tmpValue;
+  const tmpOverride = TILEs[i].dataset.overrideColor;
+  if (TILEs[j].dataset.overrideColor) {
+    TILEs[i].dataset.overrideColor = TILEs[j].dataset.overrideColor;
   } else {
-    delete tiles[i].dataset.overrideColor;
+    delete TILEs[i].dataset.overrideColor;
   }
   if (tmpOverride) {
-    tiles[j].dataset.overrideColor = tmpOverride;
+    TILEs[j].dataset.overrideColor = tmpOverride;
   } else {
     delete tiles[j].dataset.overrideColor;
   }
