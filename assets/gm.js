@@ -408,12 +408,12 @@ function swap(i, j) {
   if (tmpOverride) {
     TILEs[j].dataset.overrideColor = tmpOverride;
   } else {
-    delete tiles[j].dataset.overrideColor;
+    delete TILEs[j].dataset.overrideColor;
   }
-  tiles[i].innerHTML = "";
-  tiles[j].innerHTML = "";
-  tiles[i].appendChild(createTileContent(tiles[i].value, tiles[i].dataset.overrideColor));
-  tiles[j].appendChild(createTileContent(tiles[j].value, tiles[j].dataset.overrideColor));
+  TILEs[i].innerHTML = "";
+  TILEs[j].innerHTML = "";
+  TILEs[i].appendChild(createTileContent(TILEs[i].value, TILEs[i].dataset.overrideColor));
+  TILEs[j].appendChild(createTileContent(TILEs[j].value, TILEs[j].dataset.overrideColor));
   if (gameState.gamestart) {
     gameState.mytarn = !gameState.mytarn;
     VSthink();
@@ -444,8 +444,8 @@ function swap2(a, b) {
   checkAllFish();
 }
 function VSswap(a, b) {
-  const tileA = tiles[a];
-  const tileB = tiles[b];
+  const tileA = TILEs[a];
+  const tileB = TILEs[b];
   if (CONFIG.three.includes(tileB.value)) {
     const removedValue = tileB.value;
     tileB.value = tileA.value;
@@ -482,8 +482,8 @@ function VSswap(a, b) {
   checkAllFish();
 }
 function redrawTiles() {
-  for (let i = 0; i < tiles.length; i++) {
-    const td = tiles[i];
+  for (let i = 0; i < TILEs.length; i++) {
+    const td = TILEs[i];
     td.innerHTML = "";
     td.appendChild(createTileContent(td.value, td.dataset.overrideColor));
   }
@@ -497,7 +497,7 @@ function showGameOver() {
   document.querySelectorAll('.tile').forEach(td => td.style.pointerEvents = 'none');
 }
 function checkAllFish() {
-  const all = tiles.concat(STs).concat(VSSTs);
+  const all = TILEs.concat(STs).concat(VSSTs);
   const playerPresent = all.some(td => CONFIG.three.includes(td.value));
   const enemyPresent = all.some(td => CONFIG.three2.includes(td.value));
   if (!playerPresent) {
@@ -533,7 +533,7 @@ function resetGame() {
   gameState.mytarn = true;
   gameState.fastTd = null;
   gameState.fastTd2 = null;
-  tiles.forEach((td, i) => {
+  TILEs.forEach((td, i) => {
     td.value = i + 1;
     td.classList.remove('empty');
     td.innerHTML = "";
