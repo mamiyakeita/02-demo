@@ -337,7 +337,7 @@ if (src.classList && src.classList.contains("circle2")) {
     gameState.fastTd2 = null;
     return;
   }
-    
+}
 if (gameState.fastTd2 === index) {
   const circle = td2.querySelector('.circle2');
   if (!circle) return;
