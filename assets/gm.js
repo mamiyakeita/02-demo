@@ -336,39 +336,45 @@ function click2(e) {
       gameState.fastTd2 = null;
       return;
     }
-    if (gameState.fastTd2 === index) {
-      const circle = td2.querySelector('.circle2');
-    if (!circle) return;
-      const allSTcells = document.querySelectorAll('td.ST');
-      allSTcells.forEach(cell => {
-        if (cell.dataset.overrideColor === CONFIG.OTHER_COLOR) {
-          const prev = cell.dataset.prevColor || getDefaultSTColor(cell.value);
-          const c2 = cell.querySelector('.circle2');
-          if (c2) c2.style.backgroundColor = prev;
-          delete cell.dataset.overrideColor;
-          delete cell.dataset.prevColor;
-        }
-      });
-      const clickedColor =
-        circle.style.backgroundColor ||
-        getComputedStyle(circle).backgroundColor ||
-        getDefaultSTColor(td2.value);//初期値を返すぐらいならエラーにする
-      const newOtherColor = clickedColor;
-      const newCellColor = CONFIG.OTHER_COLOR;
-      CONFIG.OTHER_COLOR = newOtherColor;
-      td2.dataset.prevColor = clickedColor;
-      td2.dataset.overrideColor = newCellColor;
-      circle.style.backgroundColor = newCellColor;
-      gameState.savedST = { index: index, prevColor: clickedColor };
-      gameState.fastTd2 = null;
-      return;
+    
+if (gameState.fastTd2 === index) {
+  const circle = td2.querySelector('.circle2');
+  if (!circle) return;
+
+  const allSTcells = document.querySelectorAll('td.ST');
+  allSTcells.forEach(cell => {
+    if (cell.dataset.overrideColor === CONFIG.OTHER_COLOR) {
+      const prev = cell.dataset.prevColor || getDefaultSTColor(cell.value);
+      const c2 = cell.querySelector('.circle2');
+      if (c2) c2.style.backgroundColor = prev;
+      delete cell.dataset.overrideColor;
+      delete cell.dataset.prevColor;
     }
+  });
+  const clickedColor =
+    circle.style.backgroundColor ||
+    getComputedStyle(circle).backgroundColor ||
+    getDefaultSTColor(td2.value);
+
+  const newOtherColor = clickedColor;
+  const newCellColor = CONFIG.OTHER_COLOR;
+
+  CONFIG.OTHER_COLOR = newOtherColor;
+  td2.dataset.prevColor = clickedColor;
+  td2.dataset.overrideColor = newCellColor;
+  circle.style.backgroundColor = newCellColor;
+
+  gameState.savedST = { index: index, prevColor: clickedColor };
+  gameState.fastTd2 = null;
+
+  // ★★★ 修正ポイント：emit をここに入れる ★★★
   socket.emit("playerAction", {
     type: "click",
     index: index,
     color: circle.style.backgroundColor
   });
-  }
+
+  return;
 }
 function swap(i, j) {
   const aVal = TILEs[i].value;
