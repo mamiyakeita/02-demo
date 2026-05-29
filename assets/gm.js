@@ -324,18 +324,19 @@ function click2(e) {
       }
     }
   }
-  if (src.classList && src.classList.contains("circle2")) {
-    const circle = td2.querySelector('.circle2');
-    if (!circle) return;
-    if (gameState.fastTd2 == null) {
-      gameState.fastTd2 = index;
-      return;
-    }
-    if (gameState.fastTd2 !== index && neighbors2.includes(index)) {
-      swap2(gameState.fastTd2, index);
-      gameState.fastTd2 = null;
-      return;
-    }
+}
+if (src.classList && src.classList.contains("circle2")) {
+  const circle = td2.querySelector('.circle2');
+  if (!circle) return;
+  if (gameState.fastTd2 == null) {
+    gameState.fastTd2 = index;
+    return;
+  }
+  if (gameState.fastTd2 !== index && neighbors2.includes(index)) {
+    swap2(gameState.fastTd2, index);
+    gameState.fastTd2 = null;
+    return;
+  }
     
 if (gameState.fastTd2 === index) {
   const circle = td2.querySelector('.circle2');
