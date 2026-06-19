@@ -617,5 +617,5 @@ function applyOpponentMove(index, color) {
   circle.style.backgroundColor = color;
 }
 window.onload = () => {
-  //init();
+  init();
 };
