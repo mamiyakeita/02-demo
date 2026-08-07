@@ -308,8 +308,10 @@ function click2(e) {
   let src = e.target;
   const td2 = src.closest("td");
   if (!td2) return;
-    const index = parseInt(td2.dataset.index);
-    const neighbors2 = [];
+
+  const index = parseInt(td2.dataset.index);
+  const neighbors2 = [];
+
   if (gameState.fastTd2 !== null) {
     const row = Math.floor((gameState.fastTd2 - CONFIG.ST_INDEX_OFFSET) / 3);
     const col = (gameState.fastTd2 - CONFIG.ST_INDEX_OFFSET) % 3;
@@ -324,59 +326,62 @@ function click2(e) {
       }
     }
   }
-}
-if (src.classList && src.classList.contains("circle2")) {
-  const circle = td2.querySelector('.circle2');
-  if (circle) {
-    if (gameState.fastTd2 == null) {
-      gameState.fastTd2 = index;
+
+  if (src.classList && src.classList.contains("circle2")) {
+    const circle = td2.querySelector('.circle2');
+    if (circle) {
+      if (gameState.fastTd2 == null) {
+        gameState.fastTd2 = index;
+      }
     }
   }
-}
+
   if (gameState.fastTd2 !== index && neighbors2.includes(index)) {
     swap2(gameState.fastTd2, index);
     gameState.fastTd2 = null;
     return;
   }
-}
-if (gameState.fastTd2 === index) {
-  const circle = td2.querySelector('.circle2');
-  if (!circle) return;
 
-  const allSTcells = document.querySelectorAll('td.ST');
-  allSTcells.forEach(cell => {
-    if (cell.dataset.overrideColor === CONFIG.OTHER_COLOR) {
-      const prev = cell.dataset.prevColor || getDefaultSTColor(cell.value);
-      const c2 = cell.querySelector('.circle2');
-      if (c2) c2.style.backgroundColor = prev;
-      delete cell.dataset.overrideColor;
-      delete cell.dataset.prevColor;
-    }
-  });
-  const clickedColor =
-    circle.style.backgroundColor ||
-    getComputedStyle(circle).backgroundColor ||
-    getDefaultSTColor(td2.value);
+  if (gameState.fastTd2 === index) {
+    const circle = td2.querySelector('.circle2');
+    if (!circle) return;
 
-  const newOtherColor = clickedColor;
-  const newCellColor = CONFIG.OTHER_COLOR;
+    const allSTcells = document.querySelectorAll('td.ST');
+    allSTcells.forEach(cell => {
+      if (cell.dataset.overrideColor === CONFIG.OTHER_COLOR) {
+        const prev = cell.dataset.prevColor || getDefaultSTColor(cell.value);
+        const c2 = cell.querySelector('.circle2');
+        if (c2) c2.style.backgroundColor = prev;
+        delete cell.dataset.overrideColor;
+        delete cell.dataset.prevColor;
+      }
+    });
 
-  CONFIG.OTHER_COLOR = newOtherColor;
-  td2.dataset.prevColor = clickedColor;
-  td2.dataset.overrideColor = newCellColor;
-  circle.style.backgroundColor = newCellColor;
+    const clickedColor =
+      circle.style.backgroundColor ||
+      getComputedStyle(circle).backgroundColor ||
+      getDefaultSTColor(td2.value);
 
-  gameState.savedST = { index: index, prevColor: clickedColor };
-  gameState.fastTd2 = null;
+    const newOtherColor = clickedColor;
+    const newCellColor = CONFIG.OTHER_COLOR;
 
-  // ★★★ 修正ポイント：emit をここに入れる ★★★
-  socket.emit("playerAction", {
-    type: "click",
-    index: index,
-    color: circle.style.backgroundColor
-  });
+    CONFIG.OTHER_COLOR = newOtherColor;
+    td2.dataset.prevColor = clickedColor;
+    td2.dataset.overrideColor = newCellColor;
+    circle.style.backgroundColor = newCellColor;
 
-  return;
+    gameState.savedST = { index: index, prevColor: clickedColor };
+    gameState.fastTd2 = null;
+
+    // ★★★ 修正ポイント：emit をここに入れる ★★★
+    socket.emit("playerAction", {
+      type: "click",
+      index: index,
+      color: circle.style.backgroundColor
+    });
+
+    return;
+  }
 }
 function swap(i, j) {
   const aVal = TILEs[i].value;
