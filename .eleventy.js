@@ -1,7 +1,7 @@
 module.exports = function(eleventyConfig) {
 
   // assetsフォルダをそのままコピー
-  eleventyConfig.addPassthroughCopy("source/assets");
+  eleventyConfig.addPassthroughCopy("assets");
 
   return {
     dir: {
