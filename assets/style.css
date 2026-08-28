@@ -220,3 +220,6 @@ html, body {
   overflow: hidden;          /* スクロール完全禁止 */
   background-color: grey;
 }
+#canvas {
+  display: none;
+}
