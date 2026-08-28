@@ -190,21 +190,3 @@ body {
   color: #ffd54f;
   text-shadow: 0 0 1vh rgba(0,0,0,0.6);
 }
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden; /* スクロールを完全に禁止 */
-}
-
-/* 表示したいメイン画面のコンテナ */
-.main-screen {          /* クラス名は実際のものに合わせて変更 */
-  position: fixed;      /* または absolute */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;     /* 内部もスクロールさせない場合 */
-  box-sizing: border-box;
-}
