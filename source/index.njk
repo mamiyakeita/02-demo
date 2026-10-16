@@ -2,32 +2,31 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>paintingbar51</title>
-  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
-  <link rel="stylesheet" href="assets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>オセロ</title>
+  <link rel="stylesheet" href="/assets/style.css">
   <script src="/assets/gm.js" defer></script>
-  <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-  <div class="table-wrapper">
-    <table id="sakusen" class="sakusen"></table>
-    <table id="VSsakusen" class="VSsakusen"></table>
-    <table id="table" class="table"></table>
-    <button id="startButton">！開戦！</button>
-    <p><span id="mytime" class="mytimer">99:99</span></p>
-    <div id="gameOver" class="game-over hidden">
-      <div class="game-over-content">
-        <p id="gameOverMessage">YOU LOSE</p>
-        <button id="gameOverOk" class="game-over-ok">OK</button>
+  <div class="container">
+    <h1>オセロ</h1>
+
+    <div class="info">
+      <div class="score">
+        <span class="black-score">黒: <strong id="blackCount">2</strong></span>
+        <span class="white-score">白: <strong id="whiteCount">2</strong></span>
       </div>
+      <div class="turn" id="turnDisplay">黒の番です</div>
     </div>
-    <div id="winOverlay" class="game-over hidden">
-      <div class="game-over-content">
-        <p id="winMessage">YOU WIN</p>
-        <button id="winOk" class="game-over-ok">OK</button>
-      </div>
+
+    <div id="board" class="board"></div>
+
+    <div class="controls">
+      <button id="restartBtn">最初から</button>
+      <button id="passBtn" class="hidden">パス</button>
     </div>
+
+    <div id="message" class="message"></div>
   </div>
 </body>
 </html>
