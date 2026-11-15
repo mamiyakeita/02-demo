@@ -1,219 +1,118 @@
-const SIZE = 8;
-const EMPTY = 0;
 const BLACK = 1;
 const WHITE = 2;
 
-let board = [];
-let currentPlayer = BLACK;
-let gameOver = false;
+const socket = io();
 
-const directions = [
-  [-1, -1], [-1, 0], [-1, 1],
-  [0, -1],          [0, 1],
-  [1, -1],  [1, 0],  [1, 1]
-];
-
+const lobbyEl = document.getElementById("lobby");
+const gameEl = document.getElementById("game");
 const boardEl = document.getElementById("board");
 const blackCountEl = document.getElementById("blackCount");
 const whiteCountEl = document.getElementById("whiteCount");
 const turnDisplay = document.getElementById("turnDisplay");
+const myColorEl = document.getElementById("myColor");
+const roomLabel = document.getElementById("roomLabel");
 const messageEl = document.getElementById("message");
-const restartBtn = document.getElementById("restartBtn");
-const passBtn = document.getElementById("passBtn");
+const lobbyMsg = document.getElementById("lobbyMsg");
+const roomInput = document.getElementById("roomInput");
 
-function initBoard() {
-  board = Array.from({ length: SIZE }, () => Array(SIZE).fill(EMPTY));
-  // 初期配置
-  board[3][3] = WHITE;
-  board[3][4] = BLACK;
-  board[4][3] = BLACK;
-  board[4][4] = WHITE;
-  currentPlayer = BLACK;
-  gameOver = false;
-  messageEl.textContent = "";
-  passBtn.classList.add("hidden");
-  render();
-  updateInfo();
-}
+let myColor = null;
+let currentState = null;
 
-function isValidMove(row, col, player) {
-  if (board[row][col] !== EMPTY) return false;
+document.getElementById("createBtn").onclick = () => {
+  lobbyMsg.textContent = "部屋を作成中...";
+  socket.emit("createRoom");
+};
 
-  const opponent = player === BLACK ? WHITE : BLACK;
-
-  for (const [dr, dc] of directions) {
-    let r = row + dr;
-    let c = col + dc;
-    let foundOpponent = false;
-
-    while (r >= 0 && r < SIZE && c >= 0 && c < SIZE) {
-      if (board[r][c] === EMPTY) break;
-      if (board[r][c] === opponent) {
-        foundOpponent = true;
-      } else if (board[r][c] === player) {
-        if (foundOpponent) return true;
-        break;
-      }
-      r += dr;
-      c += dc;
-    }
+document.getElementById("joinBtn").onclick = () => {
+  const code = roomInput.value.trim();
+  if (!code) {
+    lobbyMsg.textContent = "部屋コードを入力してください";
+    return;
   }
-  return false;
-}
+  lobbyMsg.textContent = "参加中...";
+  socket.emit("joinRoom", code);
+};
 
-function getValidMoves(player) {
-  const moves = [];
-  for (let r = 0; r < SIZE; r++) {
-    for (let c = 0; c < SIZE; c++) {
-      if (isValidMove(r, c, player)) {
-        moves.push([r, c]);
-      }
-    }
+document.getElementById("leaveBtn").onclick = () => {
+  location.reload();
+};
+
+socket.on("joined", ({ roomId, color, state }) => {
+  myColor = color;
+  lobbyEl.classList.add("hidden");
+  gameEl.classList.remove("hidden");
+  roomLabel.textContent = `部屋: ${roomId}`;
+  myColorEl.textContent = color === BLACK ? "あなたは黒" : "あなたは白";
+  applyState(state);
+
+  if (!state.players.white) {
+    messageEl.textContent = "相手の参加を待っています...";
   }
-  return moves;
-}
+});
 
-function placeDisc(row, col, player) {
-  board[row][col] = player;
-  const opponent = player === BLACK ? WHITE : BLACK;
+socket.on("state", (state) => {
+  applyState(state);
+});
 
-  for (const [dr, dc] of directions) {
-    let r = row + dr;
-    let c = col + dc;
-    const toFlip = [];
+socket.on("message", (msg) => {
+  messageEl.textContent = msg;
+});
 
-    while (r >= 0 && r < SIZE && c >= 0 && c < SIZE) {
-      if (board[r][c] === EMPTY) break;
-      if (board[r][c] === opponent) {
-        toFlip.push([r, c]);
-      } else if (board[r][c] === player) {
-        for (const [fr, fc] of toFlip) {
-          board[fr][fc] = player;
-        }
-        break;
-      }
-      r += dr;
-      c += dc;
-    }
-  }
-}
+socket.on("errorMsg", (msg) => {
+  lobbyMsg.textContent = msg;
+});
 
-function countDiscs() {
-  let black = 0, white = 0;
-  for (let r = 0; r < SIZE; r++) {
-    for (let c = 0; c < SIZE; c++) {
-      if (board[r][c] === BLACK) black++;
-      if (board[r][c] === WHITE) white++;
-    }
-  }
-  return { black, white };
-}
+function applyState(state) {
+  currentState = state;
+  blackCountEl.textContent = state.scores.black;
+  whiteCountEl.textContent = state.scores.white;
 
-function updateInfo() {
-  const { black, white } = countDiscs();
-  blackCountEl.textContent = black;
-  whiteCountEl.textContent = white;
-
-  if (gameOver) {
-    turnDisplay.textContent = "ゲーム終了";
+  if (state.gameOver) {
+    turnDisplay.textContent = "終了";
   } else {
-    turnDisplay.textContent = currentPlayer === BLACK ? "黒の番です" : "白の番です";
+    turnDisplay.textContent =
+      state.currentPlayer === BLACK ? "黒の番" : "白の番";
   }
+
+  renderBoard(state);
 }
 
-function checkGameOver() {
-  const blackMoves = getValidMoves(BLACK);
-  const whiteMoves = getValidMoves(WHITE);
-
-  if (blackMoves.length === 0 && whiteMoves.length === 0) {
-    gameOver = true;
-    const { black, white } = countDiscs();
-    if (black > white) {
-      messageEl.textContent = `黒の勝ち！ (${black} - ${white})`;
-    } else if (white > black) {
-      messageEl.textContent = `白の勝ち！ (${white} - ${black})`;
-    } else {
-      messageEl.textContent = `引き分け！ (${black} - ${white})`;
-    }
-    passBtn.classList.add("hidden");
-    return true;
-  }
-  return false;
-}
-
-function switchTurn() {
-  currentPlayer = currentPlayer === BLACK ? WHITE : BLACK;
-
-  const moves = getValidMoves(currentPlayer);
-  if (moves.length === 0) {
-    // パス可能か確認
-    const opponentMoves = getValidMoves(currentPlayer === BLACK ? WHITE : BLACK);
-    if (opponentMoves.length === 0) {
-      checkGameOver();
-    } else {
-      messageEl.textContent = (currentPlayer === BLACK ? "黒" : "白") + "は打てる場所がありません。パスしてください。";
-      passBtn.classList.remove("hidden");
-    }
-  } else {
-    messageEl.textContent = "";
-    passBtn.classList.add("hidden");
-  }
-  updateInfo();
-  render();
-}
-
-function handleClick(row, col) {
-  if (gameOver) return;
-  if (!isValidMove(row, col, currentPlayer)) return;
-
-  placeDisc(row, col, currentPlayer);
-  render();
-  updateInfo();
-
-  if (!checkGameOver()) {
-    switchTurn();
-  }
-}
-
-function render() {
+function renderBoard(state) {
   boardEl.innerHTML = "";
-  const validMoves = gameOver ? [] : getValidMoves(currentPlayer);
+  const canMove =
+    !state.gameOver &&
+    state.currentPlayer === myColor &&
+    state.players.black &&
+    state.players.white;
 
-  for (let r = 0; r < SIZE; r++) {
-    for (let c = 0; c < SIZE; c++) {
+  const validSet = new Set(
+    (state.validMoves || []).map(([r, c]) => `${r},${c}`)
+  );
+
+  for (let r = 0; r < 8; r++) {
+    for (let c = 0; c < 8; c++) {
       const cell = document.createElement("div");
       cell.className = "cell";
 
-      if (validMoves.some(([vr, vc]) => vr === r && vc === c)) {
-        cell.classList.add("valid");
+      const isValid = canMove && validSet.has(`${r},${c}`);
+      if (isValid) cell.classList.add("valid");
+
+      const v = state.board[r][c];
+      if (v === BLACK) {
+        const d = document.createElement("div");
+        d.className = "disc black";
+        cell.appendChild(d);
+      } else if (v === WHITE) {
+        const d = document.createElement("div");
+        d.className = "disc white";
+        cell.appendChild(d);
       }
 
-      if (board[r][c] === BLACK) {
-        const disc = document.createElement("div");
-        disc.className = "disc black";
-        cell.appendChild(disc);
-      } else if (board[r][c] === WHITE) {
-        const disc = document.createElement("div");
-        disc.className = "disc white";
-        cell.appendChild(disc);
+      if (isValid) {
+        cell.onclick = () => socket.emit("move", { row: r, col: c });
       }
 
-      cell.addEventListener("click", () => handleClick(r, c));
       boardEl.appendChild(cell);
     }
   }
 }
-
-restartBtn.addEventListener("click", initBoard);
-
-passBtn.addEventListener("click", () => {
-  if (gameOver) return;
-  const moves = getValidMoves(currentPlayer);
-  if (moves.length > 0) return; // 打てるのにパスは不可
-  messageEl.textContent = "";
-  passBtn.classList.add("hidden");
-  switchTurn();
-});
-
-// 開始
-initBoard();
