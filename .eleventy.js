@@ -1,12 +1,10 @@
-module.exports = function(eleventyConfig) {
-
-  // assetsフォルダをそのままコピー
+module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets");
 
   return {
     dir: {
-      input: "source",      // 入力フォルダ
-      output: "deploy/_site" // 出力フォルダ
+      input: "source",
+      output: "deploy/_site"
     }
   };
 };
