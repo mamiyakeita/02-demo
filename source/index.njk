@@ -3,30 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>オセロ</title>
+  <title>オンラインオセロ</title>
   <link rel="stylesheet" href="/assets/style.css">
+  <script src="/socket.io/socket.io.js"></script>
   <script src="/assets/gm.js" defer></script>
 </head>
 <body>
   <div class="container">
-    <h1>オセロ</h1>
+    <h1>オンラインオセロ</h1>
 
-    <div class="info">
-      <div class="score">
-        <span class="black-score">黒: <strong id="blackCount">2</strong></span>
-        <span class="white-score">白: <strong id="whiteCount">2</strong></span>
+    <!-- ロビー -->
+    <div id="lobby" class="panel">
+      <button id="createBtn">部屋を作る</button>
+      <div class="join-row">
+        <input id="roomInput" type="text" placeholder="部屋コード" maxlength="8">
+        <button id="joinBtn">参加</button>
       </div>
-      <div class="turn" id="turnDisplay">黒の番です</div>
+      <p id="lobbyMsg" class="message"></p>
     </div>
 
-    <div id="board" class="board"></div>
+    <!-- ゲーム画面 -->
+    <div id="game" class="hidden">
+      <div class="info">
+        <div class="score">
+          <span>黒: <strong id="blackCount">2</strong></span>
+          <span>白: <strong id="whiteCount">2</strong></span>
+        </div>
+        <div id="turnDisplay" class="turn">-</div>
+        <div id="myColor" class="my-color"></div>
+      </div>
 
-    <div class="controls">
-      <button id="restartBtn">最初から</button>
-      <button id="passBtn" class="hidden">パス</button>
+      <p id="roomLabel" class="room-label"></p>
+      <div id="board" class="board"></div>
+      <p id="message" class="message"></p>
+      <button id="leaveBtn">部屋を出る</button>
     </div>
-
-    <div id="message" class="message"></div>
   </div>
 </body>
 </html>
